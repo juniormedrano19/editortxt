@@ -2,15 +2,15 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 
-
 const firebaseConfig = {
-    apiKey: "AIzaSyA4QLO7He4JpPaVIL7BsmRgVxF7ek7eIs8",
-    authDomain: "react-app-cursos-9fd7e.firebaseapp.com",
-    databaseURL: "https://react-app-cursos-9fd7e.firebaseio.com",
-    projectId: "react-app-cursos-9fd7e",
-    storageBucket: "react-app-cursos-9fd7e.appspot.com",
-    messagingSenderId: "947206133904",
-    appId: "1:947206133904:web:4bd67de2a57d6e1f4f6015"
+    apiKey: "AIzaSyAMrkbz_pV5iq7QsKe09pUwbrqg8XaSz5k",
+    authDomain: "editordiplo-881c0.firebaseapp.com",
+    databaseURL: "https://editordiplo-881c0.firebaseio.com",
+    projectId: "editordiplo-881c0",
+    storageBucket: "editordiplo-881c0.appspot.com",
+    messagingSenderId: "954014973377",
+    appId: "1:954014973377:web:3343c338e90d02b951c340",
+    measurementId: "G-Y7B749833E"
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);

@@ -1,5 +1,5 @@
 import React from 'react';
-/* import validator from 'validator'; */ //librería de validator
+import validator from 'validator'; //librería de validator
 /* import edit1 from '../../styles/img/edit1.svg';
 import edit4 from '../../styles/img/edit4.svg'; */
 import edit5 from '../../styles/img/edit5.svg'
@@ -9,17 +9,18 @@ import {
   } from "react-router-dom";
 import { useForm } from '../../hooks/useForm';
 import { useDispatch, useSelector } from 'react-redux';
+import { removeError, setError } from '../../actions/ui';
 import {startFacebookLogin, startGoogleLogin, startLoginEmailPassword, startTwitterLogin} from '../../actions/auth'
-/* import { removeError, setError } from '../../actions/ui'; */
 
 export const LoginScreen = () => {
     const {loading} = useSelector( state => state.ui );
     const dispatch = useDispatch();
     //Es darle acceso al dispatch, sirve para hacer dispatch de acciones
+    const {msgError} = useSelector( state => state.ui );
 
     const [values, handleInputChange]=useForm({
-        email:'operaciones@hotmail.com',
-        password:'12345678',
+        email:'',
+        password:'',
     })
 
     const {email, password}= values;
@@ -27,35 +28,15 @@ export const LoginScreen = () => {
     //SUBMIT DEL FORMULARIO
     const handleLogin=(e)=>{
         e.preventDefault();
-       /*  console.log(email, password); */
+        console.log(email); 
      /*   dispatch(login(4555,'Juniorjuo')); */
 
+        if(isFormValid()){
+            console.log(`Formulario correcto`);
+            dispatch(startLoginEmailPassword(email, password));
+        }
        
-       /* if(isFormValid()){
-        console.log(`Formulario correcto`); */
-        dispatch(startLoginEmailPassword(email, password));
-   /*  } */
     }
-
-//instalar librería npm i validator
-/* const isFormValid=()=>{
-  if( !validator.isEmail(email)){
-        dispatch(setError(`El email es incorrecto`));
-        console.log(`El email es incorrecto`);
-        return false;
-    }else if(password.length < 8){
-      dispatch(setError(`Contraseña Inválida. Recuerde que las contraseñas deben de tener de  8 caracteres a más`)); 
-        console.log(`Contraseña Inválida. Recuerde que las contraseñas deben de tener de  8 caracteres a más`);
-        return false;
-
-    }
-    dispatch(removeError()) ; 
-    return true;
-} *///para que en el redux dev tools el msg error aparezca en null
-
-
-
-
 
     const handleGoogleLogin=()=>{
         dispatch(startGoogleLogin());
@@ -67,6 +48,21 @@ export const LoginScreen = () => {
 
     const handleTwitterLogin=()=>{
             dispatch(startTwitterLogin());
+    }
+
+    const isFormValid=()=>{
+        if( !validator.isEmail(email)){
+            dispatch(setError(`El email es incorrecto`));
+           /*  console.log(`El email es incorrecto`); */
+            return false;
+        }else if(password.trim().length ===0){
+          dispatch(setError(`Contraseña es requerida`)); 
+            /* console.log(`Contraseña Inválida. Recuerde que las contraseñas deben de tener de  8 caracteres a más`); */
+            return false;
+
+        }
+        dispatch(removeError()) ; //para que en el redux dev tools el msg error aparezca en null
+        return true;
     }
 
 
@@ -82,17 +78,13 @@ export const LoginScreen = () => {
         </div>
         <div className="auth__content-secondary">
         <h3 className="auth__title">Iniciar Sesión</h3>
+
         <form onSubmit={handleLogin}>
-        
-      {/*   {
-            //si msgerror es true imprime esto si es null o undefined no imprime nada
-                msgError &&(
-                    <div className="auth__alert-error">
-            {msgError}
-        </div>
-                )
+
+        {
+            msgError &&(<div className="auth__alert-error">{msgError}</div>)
             
-        } */}
+        }
 
         <input 
             type="text"
