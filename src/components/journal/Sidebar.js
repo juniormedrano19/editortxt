@@ -1,6 +1,7 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { startLogout } from '../../actions/auth';
+//import { startNewNote } from '../../actions/notes';
 import { JournalEntries } from './JournalEntries';
 
 export const Sidebar = () => {
@@ -8,10 +9,16 @@ export const Sidebar = () => {
     const hora=new Date().getHours();
 
     const dispatch = useDispatch();
+    //const {name} = useSelector( state => state.auth );
+ /*    console.log(state); */
 
     const handleLogout=()=>{
 /* console.log(`click`); */
 dispatch(startLogout());
+    }
+
+    const handleAdd=()=>{
+        //dispatch(startNewNote());
     }
     
 
@@ -26,7 +33,7 @@ dispatch(startLogout());
 
            }
                 
-               <span> Usuario Logueado</span>
+               <span> Usuario</span>
            </h3>
            <button 
            className="btn"
@@ -36,7 +43,10 @@ dispatch(startLogout());
            </button>
 
            </div>
-           <div className="journal__new-entry">
+           <div 
+           className="journal__new-entry"
+           onClick={handleAdd}
+           >
            <i className="fas fa-plus-square fa-5x"></i>
            <p className="mt-5">
                Crear documento

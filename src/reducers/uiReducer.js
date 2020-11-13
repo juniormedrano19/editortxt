@@ -3,7 +3,7 @@ import {types} from '../types/types';
 
 const initalState={
     loading:false,
-    msgError:null,
+    msgError:null
 }
 
 export const uiReducer = (state=initalState, action) => {
@@ -31,7 +31,7 @@ export const uiReducer = (state=initalState, action) => {
                 ...state,
                 loading:false,
                
-            }
+            };
     
         default:
             return state;

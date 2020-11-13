@@ -6,7 +6,7 @@ export const NotesAppBar = () => {
             <span>06 de noviembre 2020</span>
 
             <div>
-               {/*  <button className="btn">
+               {/*  <button className="btn" >
                         Picture
                 </button> */}
                 <button className="btn">

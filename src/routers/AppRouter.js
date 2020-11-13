@@ -2,10 +2,10 @@
 
 import React, { useEffect, useState } from 'react';
 import { firebase } from '../firebase/firebase-config';
+import Loader from 'react-loader-spinner';
 import {
     BrowserRouter as Router,
     Switch,
-    Route,
     Redirect,
   } from "react-router-dom";
 import { JournalScreen } from '../components/journal/JournalScreen';
@@ -52,7 +52,16 @@ const [isLoggedIn, setisLoggedIn] = useState(false)
   if(checking){
     return(
       //Modificar con un spinner
-      <h1>Espere ...</h1>
+  /*     <h1>Espere ...</h1> */
+      <Loader
+      className="auth__loader"
+         type="TailSpin"
+         color="#00BFFF"
+         height={100}
+         width={100}
+         timeout={30000} 
+ 
+      />
     )
   }
 

@@ -1,15 +1,22 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 export const NothingSelected = () => {
+
+    //const {name} = useSelector( state => state.auth );
+ 
+
     return (
         <div className="nothing__main-content">
         <p>
-            Select something
+            Bienvenido, <span style={{fontWeight:'bold'}}>Usuario</span> a Editor Diplo
             <br />
-            or create an entry!
+            Por favor, crea un nuevo documento, pulsando
+            <br/>
+            el botón <i className="fas fa-plus-square fa-1x"></i>, de la parte superior izquierda.
         </p>
             
-        <i className="far fa-star fa-4x mt-5"></i>
+        <i className="far fa-file-alt fa-4x mt-5"></i>
 
         </div>
     )
