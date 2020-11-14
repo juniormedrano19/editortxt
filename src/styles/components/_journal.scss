@@ -42,12 +42,12 @@
 .journal__entries{
     flex: 1 1 auto;
     margin-top: 30px;
-    overflow-y: scroll; //auto
+    overflow-y: auto; //auto
 }
 //Oculta la barra de scroll
-.journal__entries::-webkit-scrollbar {
+/* .journal__entries::-webkit-scrollbar {
     display: none;
-  }
+  } */
 
 .journal__text-history{
     align-items: center;

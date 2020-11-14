@@ -1,7 +1,7 @@
 import {createStore, combineReducers, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
 import { authReducer } from '../reducers/authReducer';
-//import { notesReducer } from '../reducers/notesReducer';
+import { notesReducer } from '../reducers/notesReducer';
 import { uiReducer } from '../reducers/uiReducer';
 
 //para el tema de ver el redux devtools e implementar el middleware
@@ -10,7 +10,7 @@ const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOO
 const reducers=combineReducers({
     auth: authReducer,
     ui: uiReducer,
-    //notes:notesReducer,
+    notes:notesReducer,
 })
     /* window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), */
 export const store = createStore(

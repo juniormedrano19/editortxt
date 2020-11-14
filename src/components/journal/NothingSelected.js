@@ -3,13 +3,13 @@ import { useSelector } from 'react-redux'
 
 export const NothingSelected = () => {
 
-    //const {name} = useSelector( state => state.auth );
+    const {name} = useSelector( state => state.auth );
  
 
     return (
         <div className="nothing__main-content">
         <p>
-            Bienvenido, <span style={{fontWeight:'bold'}}>Usuario</span> a Editor Diplo
+            Bienvenido, <span style={{fontWeight:'bold'}}>{name}</span> a Editor Diplo
             <br />
             Por favor, crea un nuevo documento, pulsando
             <br/>

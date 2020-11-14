@@ -14,6 +14,7 @@ import { useDispatch } from 'react-redux';
 import { login } from '../actions/auth';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
+import { startLoadingNotes } from '../actions/notes';
 
 export const AppRouter = () => {
 
@@ -30,13 +31,15 @@ const [isLoggedIn, setisLoggedIn] = useState(false)
 //cuando la autenticación cambia ejecuto un proceso de firebase
   useEffect(() => {
     //ESTO SE CREA UN OBSERVABLE, OBJETO ESPECIAL QUE SE EJECUTA MAS DE UNA VEZ, CUANDO ME LOGUEO CUANDO CAMBIO DE USUARIO
-    firebase.auth().onAuthStateChanged((user)=>{
+    firebase.auth().onAuthStateChanged( (user)=>{
       /* console.log(user); */
       //esto pregunta si el objeto user tiene algo, entonces pregunta si existe el uid, si es null se sale de 
       //ciclo if
       if(user?.uid){
           dispatch(login(user.uid, user.displayName));// mantiene el estado
           setisLoggedIn(true); //ya está autenticado
+
+         dispatch(startLoadingNotes(user.uid));
       }else{
         setisLoggedIn(false); //deslogueado
       }
