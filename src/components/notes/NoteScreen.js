@@ -50,8 +50,6 @@ export const NoteScreen = () => {
         return newID   
     }
 
-    //const SaveMessage = ({visible}) => <div className={'saved' + (visible ? ' saved-visible' : '')}><p>Saved Successfully</p></div>
-
 
     return (
         <div className="notes__main-content">
