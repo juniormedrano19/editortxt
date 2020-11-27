@@ -82,6 +82,21 @@ export const setNote=( notes )=>({
 
 
 //ACCION de grabado
+export const startSaveNote2=(id, note)=>{
+    return async (dispatch, getState)=>{
+    
+        const {uid} = getState().auth;
+
+        const noteToFirestore={ ...note };
+        delete noteToFirestore.id; //borró el id del spread
+    //espera
+    await db.doc(`${id}/journal/notes/${note.id}`).update(noteToFirestore);
+    dispatch(refreshNote(id, noteToFirestore));
+    /* Swal.fire('Guardado', `Tu documento ha sido guardado`, 'success'); */
+    }
+}
+
+
 export const startSaveNote=(note)=>{
 return async (dispatch, getState)=>{
 

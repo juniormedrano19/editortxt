@@ -2,8 +2,6 @@ import { useState } from "react";
 import { EditorState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 
-
-
 export const useForm = ( initialState = {} ) => {
   
 const [ values, setValues ] = useState(initialState)
@@ -15,7 +13,9 @@ const reset=( newFormState = initialState )=>{
     setValues(newFormState);
 }
 
-
+const editor=(value = initialState) =>{
+    setValues(value)
+}
 
 const handleInputChange=({target})=>{
     setValues({
@@ -24,5 +24,5 @@ const handleInputChange=({target})=>{
     })
 }
 
-return [values, handleInputChange, reset];
+return [values, handleInputChange, reset,editor];
 }

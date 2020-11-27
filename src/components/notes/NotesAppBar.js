@@ -23,6 +23,7 @@ const handleDelete=()=>{
 }
 
 useEffect(() => {
+    console.log(active);
     dispatch(startSaveNote(active));
 }, [dispatch, title, active, bodyLength])
 

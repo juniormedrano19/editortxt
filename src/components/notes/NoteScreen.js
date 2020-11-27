@@ -7,6 +7,10 @@ import { NotesContador } from './NotesContador';
 import { NotesFormatBar } from './NotesFormatBar';
 import { NotesLength } from './NotesLength';
 import Loader from 'react-loader-spinner';
+import MenuFormat from '../../menu/editor'
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 
 /* import { EditorState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
@@ -108,6 +112,7 @@ useEffect(() => {
             autoComplete="off"
             name="title"
             value={ title }
+            id = "title"
             onChange={handleInputChange}
 
         />
@@ -160,7 +165,10 @@ useEffect(() => {
       /> */}
 <div  className="notes__content">
 
-        <textarea
+        <MenuFormat/>
+
+     { /*
+      <textarea
        placeholder="Escriba Aquí"
         className="notes__textarea"
         name="body"
@@ -169,6 +177,8 @@ useEffect(() => {
         >
 
         </textarea>
+        */
+      }
 </div>
       {/*   <div className="notes__image">
             <img 
