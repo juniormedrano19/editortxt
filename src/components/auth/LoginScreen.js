@@ -17,7 +17,6 @@ export const LoginScreen = () => {
     const dispatch = useDispatch();
     //Es darle acceso al dispatch, sirve para hacer dispatch de acciones
     const {msgError} = useSelector( state => state.ui );
-
     const [values, handleInputChange]=useForm({
         email:'',
         password:'',

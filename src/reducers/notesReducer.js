@@ -22,7 +22,7 @@ switch (action.type) {
     case types.notesAddNew:
         return{
             ...state,
-            notes:[action.payload, ...state.notes]
+            notes:[...state.notes,action.payload]
         }
     case types.notesLoad:
        /*  console.log(action.payload); */

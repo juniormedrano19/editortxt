@@ -5,23 +5,23 @@ import { activeNote, startDeleting } from '../../actions/notes';
 import basura from '../../styles/img/basura.svg'
 
 /*{value}*/
-export const JournalEntry = ( {indice,id, date, title, body}) => {
+export const JournalEntry = ( {indice,id, date, title, body,titleStart}) => {
 
     const documentDate=moment(date);
     const dispatch = useDispatch();
  /*    const {active} = useSelector( state => state.notes ); */
 
-    const handleDelete=()=>{
-          
-        dispatch(startDeleting(id))
-    }
+    
 
     const handleEntryClick=()=>{
         dispatch(activeNote(id,{
-            date, title, body
+            date, title, body,titleStart
         }));
     }
-
+    const handleDelete=()=>{
+          handleEntryClick();
+        dispatch(startDeleting(id));
+    }
 
   /*   console.log(documentDate); */
   const dateCreated=documentDate.format('dddd');
@@ -73,9 +73,9 @@ export const JournalEntry = ( {indice,id, date, title, body}) => {
         </div> */}
         <div className="journal__entry-body">
         <p className="journal__entry-title">
-         {title ? `${title.substring(0,20)}` : `Documento sin título ${indice+1}`
-         
-         
+
+         {title ? `${title.substring(0,20)}` : (titleStart=`Sin título ${indice+1}` && `Sin título ${indice+1}`)
+            
          }
           {/*   Título del archivo {value} */} {/* Sino pone nada por defecto sería Texto 1,2,3, etc */}
         </p>

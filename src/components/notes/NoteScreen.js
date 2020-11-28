@@ -22,7 +22,7 @@ export const NoteScreen = () => {
 
    const  [values, handleInputChange, reset]= useForm(docNew);
 
-   const {body, title,id}=values;
+   const {body, title,id,titleStart}=values;
    const activeId = useRef( docNew.id );
 
    useEffect(() => {
@@ -56,7 +56,7 @@ useEffect(() => {
   const keyPressHandler = (e) => {
     
         setTest(true);
-        console.log(test);
+        /* console.log(test); */
   
         
      
@@ -65,8 +65,8 @@ useEffect(() => {
   const keyUpHandler=(e)=>{
       setTimeout(()=>{
         setTest(false);
-        console.log(test);
-      },5000)
+        /* console.log(test); */
+      },2000)
     
   }
 
@@ -103,7 +103,7 @@ useEffect(() => {
 <div className="notes__appbar">
 <input 
             type="text"
-            placeholder="Documento sin título"
+            placeholder={titleStart}
             className="notes__title-input"
             autoComplete="off"
             name="title"
