@@ -165,7 +165,8 @@ useEffect(() => {
       /> */}
 <div  className="notes__content">
 
-        <MenuFormat/>
+        <MenuFormat
+        />
 
      { /*
       <textarea
