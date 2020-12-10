@@ -148,11 +148,16 @@ export const startLogout=()=>{
        await firebase.auth().signOut();
 
        dispatch(logout());
+       dispatch(noteLogout());
 
     }
 
 
 }
+
+export const noteLogout=()=>({
+    type: types.notesLogoutCleaning,
+})
 
 export const logout=()=>({
     type: types.logout,

@@ -1,13 +1,24 @@
 .nothing__main-content{
     align-items: center;
-    background-color: $primary;
-    color:white;
+    /* background-color: darken($color: $light-grey, $amount: 25); */
+    /* background-image: url('../img/imgFondo3.jpeg'); */
+    background-color: white;
+
+   /*  background-size: cover; */
+  /*  color:wheat */
+    color:lighten($color: $sidebar1, $amount: 15);
+    align-items: center;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
+    
+  
     height: 100vh;
 
     p{
         text-align: center;
     }
+}
+
+.nothing__main-parrafo{
+ font-size: 18px;
 }

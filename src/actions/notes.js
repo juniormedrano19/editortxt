@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2'
 import { NoteScreen } from "../components/notes/NoteScreen";
 import { db } from "../firebase/firebase-config";
 import { loadNote } from "../helpers/loadNote";
@@ -17,6 +18,7 @@ const {uid}=getState().auth;//cogeremos el uid para la BD
 const newNote={
     title:'',
     body:'',
+    titleStart:'Sin título', 
     date:new Date().getTime(),
 }
 
@@ -29,6 +31,7 @@ const doc = await db.collection(`${uid}/journal/notes`).add(newNote);
 /* console.log(doc); */
 
 dispatch(activeNote(doc.id, newNote));
+dispatch(addNewNote(doc.id, newNote));
 
 
 /* console.log(doc); */
@@ -49,6 +52,14 @@ export const activeNote=(id, note)=>({
 
     }
 
+});
+
+export const addNewNote=(id, note)=>({
+type:types.notesAddNew,
+payload:{
+    id,
+    ...note,
+}
 })
 
 export const startLoadingNotes=(uid)=>{
@@ -68,3 +79,88 @@ export const setNote=( notes )=>({
     payload:notes,
 
 })
+
+
+//ACCION de grabado
+export const startSaveNote=(note)=>{
+return async (dispatch, getState)=>{
+
+    const {uid} = getState().auth;
+
+
+
+    const noteToFirestore={ ...note };
+    delete noteToFirestore.id; //borró el id del spread
+//espera
+await db.doc(`${uid}/journal/notes/${note.id}`).update(noteToFirestore);
+dispatch(refreshNote(note.id, noteToFirestore));
+/* Swal.fire('Guardado', `Tu documento ha sido guardado`, 'success'); */
+}
+
+}
+
+//Unicamente actualice de mi store, unicamente la que cambia
+export const refreshNote=(id, note)=>({
+    type: types.notesUpdated,
+    payload:{
+        id,
+        note:{
+            id,
+            ...note,
+        }
+    }
+})
+
+export const startDeleting=(id)=>{
+return async(dispatch, getState)=>{
+    const {name} = getState().auth
+    const uid=getState().auth.uid;
+    const {active}=getState().notes;
+    const {title,titleStart}=active
+    const messageDocument=()=>{
+        if(title){
+            return title;
+        }else{
+             return titleStart;
+        }
+     }
+const nameParsed=name
+const nameSplit=nameParsed.split(" ") 
+
+/*await db.doc(`${uid}/journal/notes/${ id}`).delete();*/
+Swal.fire({
+    title: `${nameSplit[0]}, ¿Estás seguro de eliminar ${messageDocument()}?`,
+    text: "Recuerda:¡No podrás revertir esto!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Sí, eliminar ahora'
+  }).then((result) => {
+    if (result.isConfirmed) {
+        db.doc(`${uid}/journal/notes/${ id}`).delete().then(() =>{
+            console.log("elimino bd");
+            dispatch(deleteNote(id));
+            Swal.fire(
+                '¡Eliminado!',
+                'Tu documento ha sido eliminado',
+                'success'
+            )
+        })
+        .catch(e=>{
+            console.log(e);
+            Swal.fire('Error',"No se pudo eliminar el documento",'error');
+        })
+    }
+  })
+
+}
+
+}
+
+export const deleteNote=(id)=>({
+    type:types.notesDelete,
+    payload:id
+})
+
+

@@ -1,25 +1,32 @@
 import React from 'react';
-/* import moment from 'moment' */
-import { useDispatch } from 'react-redux';
-import { activeNote } from '../../actions/notes';
+import moment from 'moment';
+import { useDispatch, useSelector } from 'react-redux';
+import { activeNote, startDeleting } from '../../actions/notes';
+import basura from '../../styles/img/basura.svg'
 
-export const JournalEntry = ({value}/* {id, date, title, body} */) => {
+/*{value}*/
+export const JournalEntry = ( {indice,id, date, title, body,titleStart}) => {
 
-  /*   const documentDate=moment(date);
-    const dispatch = useDispatch(); */
+    const documentDate=moment(date);
+    const dispatch = useDispatch();
+ /*    const {active} = useSelector( state => state.notes ); */
 
+    
 
-   /*  const handleEntryClick=()=>{
+    const handleEntryClick=()=>{
         dispatch(activeNote(id,{
-            date, title, body
+            date, title, body,titleStart
         }));
-    } */
-
+    }
+    const handleDelete=()=>{
+          handleEntryClick();
+        dispatch(startDeleting(id));
+    }
 
   /*   console.log(documentDate); */
- /*  const dateCreated=documentDate.format('dddd'); */
+  const dateCreated=documentDate.format('dddd');
 
-  /* const pruebaDate=()=>{
+  const pruebaDate=()=>{
 
     switch (dateCreated) {
         case 'Monday':
@@ -48,13 +55,16 @@ export const JournalEntry = ({value}/* {id, date, title, body} */) => {
             return 'Fecha no válida';
     }
   }
- */
+
+
+
+
 //onClick={handleEntryClick} en journal__entry pointer
 
     return (
         <div 
         className="journal__entry pointer"
-        
+        onClick={handleEntryClick}
         >
       {/*   <div 
         className="journal__entry-picture"
@@ -63,25 +73,49 @@ export const JournalEntry = ({value}/* {id, date, title, body} */) => {
         </div> */}
         <div className="journal__entry-body">
         <p className="journal__entry-title">
-     {/*     {title} */}
-            Título del archivo {value} {/* Sino pone nada por defecto sería Texto 1,2,3, etc */}
+
+         {title ? `${title.substring(0,20)}` : (titleStart=`Sin título ${indice+1}` && `Sin título ${indice+1}`)
+            
+         }
+          {/*   Título del archivo {value} */} {/* Sino pone nada por defecto sería Texto 1,2,3, etc */}
         </p>
-        <p className="journal__entry-content">
-        {/* {body} */}
-         El texto que se grabará, solo se verá la parte de inicio .......................................... 
-        </p>
+       {/*  <p className="journal__entry-content">
+        {body && `${body.substring(0,47)}` 
+        
+        }
+        {  El texto que se grabará, solo se verá la parte de inicio .......................................... } 
+        </p> */}
 
         </div>
-        <div className="journal__entry-data-box">
+        {/* <div className="journal__entry-data-box">
         {
             
         }
-        {/* {pruebaDate()} */}
-            <span>Sábado</span>
-       {/*      {documentDate.format('D')} */}
-            <h4>14</h4>
-        </div>
-            
+        {pruebaDate()}
+            <span>{pruebaDate()}</span>
+            {documentDate.format('D')}
+            <h4> {documentDate.format('D')} </h4>
+
+           
+           
+        </div> */}
+    {/* <div 
+    className="journal__entry-trash"
+    onClick={handleDelete}
+    >
+   <i className="far fa-trash-alt fa-2x journal__entry-color" style={{color:"white"}}></i>
+    </div>
+            */}
+            <div 
+            className="journal__entry-icondelete" 
+            onClick={handleDelete}
+            title="Eliminar Documento">
+            <img src={basura} alt=""
+
+style={{width:25}}
+/>
+            </div>
+          
         </div>
     )
 }

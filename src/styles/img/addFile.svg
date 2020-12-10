@@ -1,0 +1,18 @@
+<svg id="outline" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg">
+	<path style="fill: white" d="m443.13086 200.61914-84.51172-78.01172a39.89428 39.89428 0 0 0 -27.13086-10.60742h-67.793a104.0018 104.0018 0 1 0 -111.69528 111.69531v232.30469a40.04584 40.04584 0 0 0 40 40h224a40.04584 40.04584 0 0 0 40-40v-225.98926a40.109 40.109 0 0 0 -12.86914-29.3916zm-371.13086-80.61914a88 88 0 1 1 88 88 88.09957 88.09957 0 0 1 -88-88zm368 336a24.0275 24.0275 0 0 1 -24 24h-224a24.0275 24.0275 0 0 1 -24-24v-232.30469a104.16872 104.16872 0 0 0 95.69531-95.69531h67.793a23.9278 23.9278 0 0 1 12.51169 3.52686v52.47314a40.04584 40.04584 0 0 0 40 40h24v-16h-24a24.0275 24.0275 0 0 1 -24-24v-38.34424l72.2793 66.72024a24.06822 24.06822 0 0 1 7.7207 17.63474z" />
+	<path style="fill: white" d="m272 184h40v16h-40z" />
+	<path style="fill: white" d="m264 232h72v16h-72z" />
+	<path style="fill: white" d="m368 280h40v16h-40z" />
+	<path style="fill: white" d="m288 280h56v16h-56z" />
+	<path style="fill: white" d="m216 280h48v16h-48z" />
+	<path style="fill: white" d="m272 328h136v16h-136z" />
+	<path style="fill: white" d="m216 328h32v16h-32z" />
+	<path style="fill: white" d="m392 376h16v16h-16z" />
+	<path style="fill: white" d="m328 376h40v16h-40z" />
+	<path style="fill: white" d="m216 376h88v16h-88z" />
+	<path style="fill: white" d="m272 424h136v16h-136z" />
+	<path style="fill: white" d="m216 424h32v16h-32z" />
+	<path style="fill: white" d="m216 232h24v16h-24z" />
+	<path style="fill: white" d="m168 160v-32h32v-16h-32v-32h-16v32h-32v16h32v32z" />
+</svg>
+

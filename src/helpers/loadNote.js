@@ -5,7 +5,7 @@ import { db } from "../firebase/firebase-config"
 export const loadNote = async (uid) => {
 
 
-  const docSnap= await db.collection(`${uid}/journal/notes`).get();//retorna una promesa;
+  const docSnap= await db.collection(`${uid}/journal/notes`).orderBy("date","desc").get();//retorna una promesa;
   const documents=[];
 
  /*  console.log(docSnap); */
