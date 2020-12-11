@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import validator from 'validator'; //librería de validator
 import {
     Link,
@@ -7,6 +7,7 @@ import { useForm } from '../../hooks/useForm';
 import { removeError, setError } from '../../actions/ui';
 import { useDispatch, useSelector } from 'react-redux';
 import { startRegisterWithEmailPasswordName } from '../../actions/auth';
+import edit6 from '../../styles/img/edit6.svg'
 
 export const RegisterScreen = () => {
     //Importante para hacer el dispatch de la acción se necesita del useDispatch de react-redux;
@@ -52,15 +53,23 @@ export const RegisterScreen = () => {
         dispatch(removeError()) ; //para que en el redux dev tools el msg error aparezca en null
         return true;
     }
-
+    const [prueba, setprueba] = useState(false)
+    const handlePrueba=()=>{
+        setprueba(true)
+        console.log(prueba);
+          
+    }
 
     return (
         <>
-        <div className="auth__box-container">
-        <h3 className="auth__title">Regístrese</h3>
-        <form onSubmit={handleRegister}>
-
-        {
+        <div  className={prueba?"container ":"container sign-up-mode"}>
+      <div className="forms-container">
+        <div className="signin-signup">
+          
+          <form className="sign-up-form" onSubmit={handleRegister}>
+          
+            <h2 className="title">Regístrate</h2>
+            {
             //si msgerror es true imprime esto si es null o undefined no imprime nada
                 msgError &&(
                     <div className="auth__alert-error">
@@ -70,61 +79,83 @@ export const RegisterScreen = () => {
             
         }
 
-    
-        <input 
+            <div className="input-field">
+              <i className="fas fa-user"></i>
+              <input 
             type="text"
             name="name"
             placeholder="Tu Nombre y Apellido"
             autoComplete="off"
-            className="auth__input"
             value={name}
             onChange={handleInputChange}
         />
 
-
-
-        <input 
-            type="text"
-            name="email"
+            </div>
+            <div className="input-field">
+              <i className="fas fa-envelope"></i>
+              <input 
+              type="email" 
+              name="email"
             placeholder="Tu email"
             autoComplete="off"
-            className="auth__input"
+
             value={email}
             onChange={handleInputChange}
-        />
-        <input
+
+
+              />
+            </div>
+            <div className="input-field">
+              <i className="fas fa-lock"></i>
+              <input
         type="password"
         name="password"
         placeholder="Tu contraseña"
         autoComplete="off"
-        className="auth__input"
+
         value={password}
         onChange={handleInputChange}
          />
-
-         <input
+            </div>
+            <div className="input-field">
+              <i className="fas fa-lock"></i>
+              <input
         type="password"
         name="password2"
         placeholder="Confirmar contraseña"
         autoComplete="off"
-        className="auth__input"
         value={password2}
         onChange={handleInputChange}
          />
-        <button 
-        className="btn btn-primary btn-block mb-5"
-        type="submit"
-        >Registrarse</button>
-      
-      
-        <Link to="/auth/login"
-        className="link">
-        ¿Usted ya está registrado?
-        </Link>
-
-
-        </form>
+            </div>
+            <input type="submit" className="btn" value="Registrarse" />
+         
+          </form>
         </div>
+      </div>
+
+      <div className="panels-container">
+        <div className="panel right-panel">
+          <div className="content">
+            <h3>¿Ya tienes un usuario?</h3>
+            <p>
+              Sí ya tienes un usuario creado, ingresa al siguiente botón del Login, y disfruta de las maravillas de 
+              Editor Diplo.
+            </p>
+          
+            <Link to="/auth/login"
+             onClick={handlePrueba}
+           
+        className="link">
+        Iniciar Sesión
+        </Link>
+           
+          </div>
+          <img src={edit6} class="image" alt="" />
+        </div>
+      </div>
+    </div>
+
         </>
     )
 }

@@ -1,19 +1,20 @@
-import React from 'react';
-import validator from 'validator'; //librería de validator
+import React, { useEffect, useState } from 'react';
+/* import validator from 'validator'; */ //librería de validator
 /* import edit1 from '../../styles/img/edit1.svg';
 import edit4 from '../../styles/img/edit4.svg'; */
-import edit5 from '../../styles/img/edit5.svg'
+import edit7 from '../../styles/img/edit7.svg'
 /* import edit3 from '../../styles/img/edit3.svg'; */
-import {
-    Link,
-  } from "react-router-dom";
+import {Link} from "react-router-dom";
 import { useForm } from '../../hooks/useForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeError, setError } from '../../actions/ui';
 import {startFacebookLogin, startGoogleLogin, startLoginEmailPassword, startTwitterLogin} from '../../actions/auth'
+import { RegisterScreen } from './RegisterScreen';
+/* import { removeError, setError } from '../../actions/ui'; */
+
 
 export const LoginScreen = () => {
-    const {loading} = useSelector( state => state.ui );
+  const {loading} = useSelector( state => state.ui );
     const dispatch = useDispatch();
     //Es darle acceso al dispatch, sirve para hacer dispatch de acciones
     const {msgError} = useSelector( state => state.ui );
@@ -30,12 +31,40 @@ export const LoginScreen = () => {
         console.log(email); 
      /*   dispatch(login(4555,'Juniorjuo')); */
 
-        if(isFormValid()){
+       /* if(isFormValid()){
             console.log(`Formulario correcto`);
             dispatch(startLoginEmailPassword(email, password));
-        }
-       
+        }*/
+      dispatch(startLoginEmailPassword(email, password));
     }
+
+//instalar librería npm i validator
+/* const isFormValid=()=>{
+  if( !validator.isEmail(email)){
+        dispatch(setError(`El email es incorrecto`));
+        console.log(`El email es incorrecto`);
+        return false;
+    }else if(password.length < 8){
+      dispatch(setError(`Contraseña Inválida. Recuerde que las contraseñas deben de tener de  8 caracteres a más`)); 
+        console.log(`Contraseña Inválida. Recuerde que las contraseñas deben de tener de  8 caracteres a más`);
+        return false;
+
+    }
+    dispatch(removeError()) ; 
+    return true;
+} *///para que en el redux dev tools el msg error aparezca en null
+
+const sign_in_btn = document.querySelector("#sign-in-btn");
+const sign_up_btn = document.querySelector("#sign-up-btn");
+const container = document.querySelector(".container");
+/* console.log(sign_up_btn) */
+
+const [prueba, setprueba] = useState(false)
+const handlePrueba=()=>{
+    setprueba(true)
+    console.log(prueba);
+      
+}
 
     const handleGoogleLogin=()=>{
         dispatch(startGoogleLogin());
@@ -49,114 +78,88 @@ export const LoginScreen = () => {
             dispatch(startTwitterLogin());
     }
 
-    const isFormValid=()=>{
-        if( !validator.isEmail(email)){
-            dispatch(setError(`El email es incorrecto`));
-           /*  console.log(`El email es incorrecto`); */
-            return false;
-        }else if(password.trim().length ===0){
-          dispatch(setError(`Contraseña es requerida`)); 
-            /* console.log(`Contraseña Inválida. Recuerde que las contraseñas deben de tener de  8 caracteres a más`); */
-            return false;
-
-        }
-        dispatch(removeError()) ; //para que en el redux dev tools el msg error aparezca en null
-        return true;
-    }
-
-
-    return (
-        <>
-        <div className="auth__section">
-        <div className="auth__imagen">
-        
-        <img src={edit5} alt=""
-
-            style={{width:700}}
-        />
+  return (
+    <>
+    <div className={prueba?"container sign-up-mode":"container "}>
+      <div className="forms-container">
+        <div className="signin-signup">
+          <form className="sign-in-form" onSubmit={handleLogin}>
+            <h2 className="title">Iniciar Sesión</h2>
+            <div className="input-field">
+              <i className="fas fa-user i"></i>
+              <input type="text"
+                name="email"
+                placeholder="Email"
+                autoComplete="off" 
+                value={email}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="input-field">
+              <i className="fas fa-lock i"></i>
+              <input
+                type="password"
+                name="password"
+                placeholder="Tu contraseña" 
+                value={password}
+                onChange={handleInputChange}
+              />
+            </div>
+            <input 
+              type="submit" 
+              value="Login" 
+              className="btn solid"
+              disabled={loading}
+            />
+            <p className="social-text">Iniciar sesión con redes sociales</p>
+            <div className="social-media">
+              <div 
+                className="social-icon facebook"
+                onClick={handleFacebookLogin}
+              >
+                <i class="fab fa-facebook-f"></i>
+              </div>
+              <div 
+                className="social-icon twitter"
+                onClick={handleTwitterLogin}
+              >
+                <i class="fab fa-twitter"></i>
+              </div>
+              <div 
+                className="social-icon google"
+                onClick={handleGoogleLogin}
+              >
+                <i class="fab fa-google"></i>
+              </div>
+              {/*<a href="#" class="social-icon">
+                <i class="fab fa-linkedin-in"></i>
+              </a> */}
+            </div>
+          </form>
         </div>
-        <div className="auth__content-secondary">
-        <h3 className="auth__title">Iniciar Sesión</h3>
-
-        <form onSubmit={handleLogin}>
-
-        {
-            msgError &&(<div className="auth__alert-error">{msgError}</div>)
-            
-        }
-
-        <input 
-            type="text"
-            name="email"
-            placeholder="Email"
-            autoComplete="off"
-            className="auth__input"
-            value={email}
-            onChange={handleInputChange}
-        />
-        <input
-        type="password"
-        name="password"
-        placeholder="Tu contraseña"
-        className="auth__input"
-        value={password}
-        onChange={handleInputChange}
-         />
-        <button 
-        className="btn btn-primary btn-block"
-        type="submit"
-        disabled={loading}
-        >Iniciar Sesión</button>
-    
-       <div className="auth__social-networks">
-           <p>Iniciar sesión con redes sociales</p>
-           <div 
-    className="google-btn"
-    onClick={handleGoogleLogin}
->
-    <div className="google-icon-wrapper">
-        <img className="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="google button" />
-    </div>
-    <p className="btn-text">
-        <b>
-Inicia sesión con Google</b>
-    </p>
-</div>
-  <div 
-    className="facebook-btn"
-    onClick={handleFacebookLogin}
->
-    <div className="facebook-icon-wrapper">
-        <img className="facebook-icon" src="https://upload.wikimedia.org/wikipedia/commons/c/c2/F_icon.svg" alt="google button" />
-    </div>
-    <p className="btn-text">
-        <b>
-Inicia sesión con Facebook</b>
-    </p>
-</div>
- <div 
-    className="twitter-btn"
-    onClick={handleTwitterLogin}
->
-    <div className="twitter-icon-wrapper">
-        <img className="twitter-icon" src="https://upload.wikimedia.org/wikipedia/fr/c/c8/Twitter_Bird.svg" alt="google button" />
-    </div>
-    <p className="btn-text">
-        <b>
-Inicia sesión con Twitter</b>
-    </p>
-</div>
-       </div>
-
-        <Link to="/auth/register"
-        className="link">
-        Crear una nueva cuenta
-        </Link>
-
-
-        </form>
-        </div> 
+      </div>
+      <div className="panels-container">
+        <div className="panel left-panel">
+          <div className="content">
+            <h3>¿Eres usuario nuevo?</h3>
+            <p>
+              Vive una nueva experiencia con Editor Diplo, es un desarrollo 
+              freelance, no te arrepentirás de usarlo. ¡Anímate!
+            </p>
+            <div className="link__border">
+              <Link 
+                onClick={handlePrueba}
+                id="sign-up-btn"
+                className="link"
+                to="/auth/register">
+                Regístrate
+              </Link>
+            </div>
+          </div>
+          <img src={edit7} className="image" alt="" />
         </div>
-        </>
-    )
+      </div>
+    </div>
+  </>
+  )
 }

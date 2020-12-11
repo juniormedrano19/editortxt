@@ -9,7 +9,7 @@ export const JournalEntry = ( {indice,id, date, title, body,titleStart}) => {
 
     const documentDate=moment(date);
     const dispatch = useDispatch();
- /*    const {active} = useSelector( state => state.notes ); */
+    const {active} = useSelector( state => state.notes );
 
     
 
@@ -21,6 +21,7 @@ export const JournalEntry = ( {indice,id, date, title, body,titleStart}) => {
     const handleDelete=()=>{
           handleEntryClick();
         dispatch(startDeleting(id));
+        /* console.log(id); */
     }
 
   /*   console.log(documentDate); */
