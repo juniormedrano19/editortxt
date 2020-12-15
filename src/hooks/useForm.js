@@ -24,5 +24,13 @@ const handleInputChange=({target})=>{
     })
 }
 
-return [values, handleInputChange, reset];
+const handleEditorChange=({target})=>{
+    setValues({
+        ...values,
+        body:target.value,
+    })
+}
+
+
+return [values, handleInputChange,handleEditorChange, reset];
 }

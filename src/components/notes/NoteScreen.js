@@ -7,6 +7,14 @@ import { NotesContador } from './NotesContador';
 import { NotesFormatBar } from './NotesFormatBar';
 import { NotesLength } from './NotesLength';
 import Loader from 'react-loader-spinner';
+import { Editor } from "react-draft-wysiwyg";
+import { EditorState, convertToRaw,ContentState, convertFromHTML} from "draft-js";
+import JoditEditor from "jodit-react";
+import ReactQuill,{ Quill } from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+
 
 /* import { EditorState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
@@ -14,13 +22,18 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import '../../styles/App.css'; */
 
 export const NoteScreen = () => {
-
+  const editor = useRef(null)
+	const [content, setContent] = useState('')
+	
+	const config = {
+		readonly: false // all options from https://xdsoft.net/jodit/doc/
+	}
    const dispatch = useDispatch();
 
     const {active:docNew} = useSelector( state => state.notes );
     /* console.log(docNew); */
-
-   const  [values, handleInputChange, reset]= useForm(docNew);
+   
+   const  [values, handleInputChange,handleEditorChange, reset]= useForm(docNew);
 
    const {body, title,id,titleStart}=values;
    const activeId = useRef( docNew.id );
@@ -86,11 +99,24 @@ useEffect(() => {
 
 
 
+/*   const [editortxt, setEditortxt] = useState({
+    editorState:EditorState.createEmpty(),
+  })
+  
+  const {editorState}=editortxt; */
 
 
- 
+/* const onEditorStateChange=(editorState)=>{
+  setEditortxt({
+    editorState,
+  })
+} */
+/* 
+var quill = new Quill('#textarea1', {
+  theme: 'snow'
+});
 
-
+quill.setText('Hello World\n'); */
 
 
 
@@ -158,17 +184,30 @@ useEffect(() => {
   toolbarClassName="toolbar-class"
   placeholder="Escriba Aquí"
       /> */}
-<div  className="notes__content">
+<div  className="notes__content" id="notes__content">
 
         <textarea
        placeholder="Escriba Aquí"
         className="notes__textarea"
+        id="textarea1"
         name="body"
         value= {body}
         onChange={handleInputChange}
+      
         >
 
         </textarea>
+     {/*    <ReactQuill theme="snow" name="body" value={body} onChange={handleInputChange}/> */}
+     
+      
+
+   {/*      <Editor
+          editorState={editorState}
+          toolbarClassName="toolbarClassName"
+          wrapperClassName="wrapperClassName"
+          editorClassName="editorClassName"
+          onEditorStateChange={onEditorStateChange}
+        /> */}
 </div>
       {/*   <div className="notes__image">
             <img 
