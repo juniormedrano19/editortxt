@@ -15,8 +15,14 @@ const TextEditor = () =>{
   console.log(body);
     const options: any = {
       customInlineFn: (element: any, {Style, Entity}: any) => {
+          console.log('style')
           if (element.style.color) {
+            console.log('color-' + element.style.color);
               return Style ('color-' + element.style.color);
+          }
+          if (element.style.fontSize) {
+            console.log('font-size-' + element.style.fontSize);
+              return Style ('font-size-' + element.style.fontSize);
           }
       }
     };
@@ -33,6 +39,8 @@ const TextEditor = () =>{
   const onEditorStateChange = (state) => {
     setEditorState(state);
     var data = draftToHtml(convertToRaw(state.getCurrentContent()));
+    console.log("data");
+    console.log(data)
     active.body = data;
     dispatch(startSaveNote(active));
   };

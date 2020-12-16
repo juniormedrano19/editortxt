@@ -20,8 +20,8 @@ export const NothingSelected = () => {
         </div>
         </div>
         <div className="nothing__main-parrafo">
-        <p style={{fontFamily:'Roboto Slab'}}>
         <p style={{fontFamily:'Roboto Slab', fontWeight:'bold', color:'#259F64'}}>¡El covid ya no podrá separarnos. Desde ahora nos mantendrá mucho más unidos!</p>
+        <p style={{fontFamily:'Roboto Slab'}}>
             Bienvenido, <span style={{fontWeight:'bold'}}>{name}</span> a Editor Diplo
             <br />
             Por favor, crea un nuevo documento, pulsando
