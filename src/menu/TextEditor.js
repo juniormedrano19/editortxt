@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useRef , useEffect } from "react";
 import { Editor } from "react-draft-wysiwyg";
 import { EditorState, convertToRaw,ContentState, convertFromHTML} from "draft-js";
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,18 +10,14 @@ import {stateFromHTML} from 'draft-js-import-html';
 
 const TextEditor = () =>{
   const dispatch = useDispatch();
-  const {active} = useSelector( state => state.notes);
-  const {title, body} = active;
-  console.log(body);
+  const {active:docNew} = useSelector( state => state.notes);
+  const {title, body} = docNew;
     const options: any = {
       customInlineFn: (element: any, {Style, Entity}: any) => {
-          console.log('style')
           if (element.style.color) {
-            console.log('color-' + element.style.color);
               return Style ('color-' + element.style.color);
           }
           if (element.style.fontSize) {
-            console.log('font-size-' + element.style.fontSize);
               return Style ('font-size-' + element.style.fontSize);
           }
       }
@@ -36,13 +32,21 @@ const TextEditor = () =>{
           
   const [editorState, setEditorState] = useState(() => initialState,);
 
+  const activeId = useRef( docNew.id );
+
+  useEffect(() => {
+    if(docNew.id!==activeId.current){
+        var newstate = EditorState.createWithContent(stateFromHTML(docNew.body, options));
+        setEditorState(newstate);
+        activeId.current=docNew.id
+      }
+  }, [docNew])
+
   const onEditorStateChange = (state) => {
     setEditorState(state);
     var data = draftToHtml(convertToRaw(state.getCurrentContent()));
-    console.log("data");
-    console.log(data)
-    active.body = data;
-    dispatch(startSaveNote(active));
+    docNew.body = data;
+    dispatch(startSaveNote(docNew));
   };
 
    return (
