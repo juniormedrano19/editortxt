@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
-import { activeNote, startDeleting } from '../../actions/notes';
+import { activeNote, startDeleting, getNote } from '../../actions/notes';
 import basura from '../../styles/img/basura.svg'
 
 /*{value}*/
@@ -10,10 +10,8 @@ export const JournalEntry = ( {indice,id, date, title, body,titleStart}) => {
     const documentDate=moment(date);
     const dispatch = useDispatch();
     const {active} = useSelector( state => state.notes );
-
-    
-
-    const handleEntryClick=()=>{
+  
+    const handleEntryClick=()=>{     
         dispatch(activeNote(id,{
             date, title, body,titleStart
         }));
@@ -24,7 +22,6 @@ export const JournalEntry = ( {indice,id, date, title, body,titleStart}) => {
         /* console.log(id); */
     }
 
-  /*   console.log(documentDate); */
   const dateCreated=documentDate.format('dddd');
 
   const pruebaDate=()=>{

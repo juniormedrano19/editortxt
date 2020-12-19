@@ -135,7 +135,7 @@ transition: background-color .3s ease;
     }
   }
 
-  .notes__length{
+.notes__length{
     align-items: center;
     background-color: $length;
     color: white;
@@ -145,6 +145,9 @@ transition: background-color .3s ease;
     border: 1px solid $light-grey;
 }
 
+spinner-container {
+  display: flex;
+}
 .spinner {
   width: 100%;
   height: 100%;

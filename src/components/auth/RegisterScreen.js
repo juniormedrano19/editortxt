@@ -78,7 +78,6 @@ export const RegisterScreen = () => {
                 )
             
         }
-
             <div className="input-field">
               <i className="fas fa-user"></i>
               <input 

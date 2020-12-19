@@ -65,7 +65,6 @@ const handlePrueba=()=>{
     console.log(prueba);
       
 }
-
     const handleGoogleLogin=()=>{
         dispatch(startGoogleLogin());
     }
@@ -77,7 +76,7 @@ const handlePrueba=()=>{
     const handleTwitterLogin=()=>{
             dispatch(startTwitterLogin());
     }
-
+    
   return (
     <>
     <div className={prueba?"container sign-up-mode":"container "}>

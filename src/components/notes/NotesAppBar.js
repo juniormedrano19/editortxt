@@ -23,6 +23,7 @@ const handleDelete=()=>{
 }
 
 useEffect(() => {
+    console.log("noteappbar");
     dispatch(startSaveNote(active));
 }, [dispatch, title, active, bodyLength])
 

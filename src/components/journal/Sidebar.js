@@ -2,7 +2,6 @@ import React, {useEffect,useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { startLogout } from '../../actions/auth';
 import { startNewNote } from '../../actions/notes';
-import { NoteScreen } from '../notes/NoteScreen';
 import { JournalEntries } from './JournalEntries';
 import addFile from '../../styles/img/addFile.svg'           
 
